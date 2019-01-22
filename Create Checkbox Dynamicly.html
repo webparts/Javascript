@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    Enter a Value <input type="text" id="tb" autofocus />
+    <input type="button" id="bt" value="Create Checkbox" onclick="createChk(tb)" />
+    <p id="container"></p>
+
+    <p>
+        <input type="button" id="check" onclick="nowCheck()" value="Click it validate!" />
+    </p>
+</body>
+<script>
+    function nowCheck() {
+        // Get all the child elements inside the container.
+        var cont = document.getElementById('container').children;
+
+        for (var i = 0; i < cont.length; i++) {
+            // Check if the element is a checkbox.
+            if (cont[i].tagName == 'INPUT' && cont[i].type == 'checkbox') {     
+                // Finally, check if the checkbox is checked.
+                if (cont[i].checked) {      
+                    alert(cont[i].value + ' is checked!');
+                }
+            }
+        }
+    }
+
+    // Create and add checkboxes to your webpage.
+    var i = 1;
+    function createChk(obj) {
+        if (obj.value !== '') {
+
+            var chk = document.createElement('input');
+            chk.setAttribute('type', 'checkbox');       // Type of element.
+            chk.setAttribute('id', 'chk' + i);     // Set element id.
+            chk.setAttribute('value', obj.value);
+
+            var lbl = document.createElement('label');
+            lbl.setAttribute('for', 'chk' + i);
+
+            // Create a text box and append it to the label.
+            lbl.appendChild(document.createTextNode(obj.value));
+
+            // Append the newly created checkbox and label to <p> element.
+            container.appendChild(chk);
+            container.appendChild(lbl);
+
+            obj.value = '';
+            document.getElementById(obj.id).focus();
+
+            i = i + 1;
+        }
+    }
+</script>
+</html>
